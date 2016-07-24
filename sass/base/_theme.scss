@@ -12,7 +12,11 @@ $main-bg: #f8f8f8 !default;
 $page-bg: #252525 !default;
 $article-border: #eeeeee !default;
 
-$header-bg: #333 !default;
+//$header-bg: #333 !default; // default octopress gray
+//$header-bg: #7365ba !default; // samplesort purple
+//$header-bg: #7649b6 !default; // hmm. darker.
+//$header-bg: #290099 !default; // royal blue
+$header-bg: #35206f !default; // likewise purple
 $header-border: lighten($header-bg, 15) !default;
 $title-color: #f2f2f2 !default;
 $subtitle-color: #aaa !default;
