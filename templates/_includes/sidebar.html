@@ -1,4 +1,9 @@
 <aside class="sidebar">
+  {% include '_includes/gplus_sidebar.html' %}
+  {% include '_includes/github.html' %}
+  {% include '_includes/twitter_sidebar.html' %}
+  {% include '_includes/social.html' %}
+
   {% if SIDEBAR_IMAGE %}
   <section>
 	  <img src="{{ SITEURL }}/{{ SIDEBAR_IMAGE }}" alt="{{ SIDEBAR_IMAGE_ALT}}" width="{{SIDEBAR_IMAGE_WIDTH}}"/> 
@@ -15,6 +20,7 @@
     </ul>
   </section>
   {% if categories %}
+  <!--
   <section>
       
     <h1>Categories</h1>
@@ -24,6 +30,7 @@
       {% endfor %}
     </ul>
   </section>
+  -->
   {% endif %} 
 
   <section>
@@ -33,9 +40,5 @@
   {% endfor %}
   </section>
 
-  {% include '_includes/github.html' %}
-  {% include '_includes/social.html' %}
   {% include '_includes/links.html' %}
-  {% include '_includes/twitter_sidebar.html' %}
-  {% include '_includes/gplus_sidebar.html' %}
 </aside>
