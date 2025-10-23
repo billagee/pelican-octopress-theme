@@ -1,6 +1,6 @@
 /* Animation Toggle Control */
 (function() {
-    // Add CSS animation for pulsing effect
+    // Add CSS animation for pulsing effect and sparkle
     var style = document.createElement('style');
     style.textContent = `
         @keyframes halloween-pulse {
@@ -13,11 +13,38 @@
                 transform: scale(1.05);
             }
         }
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(180deg);
+            }
+        }
+        #animation-toggle-btn {
+            position: relative;
+            overflow: visible;
+        }
         #animation-toggle-btn.pulse {
             animation: halloween-pulse 1s ease-in-out;
         }
         #animation-toggle-btn:hover {
             animation: none !important;
+        }
+        #animation-toggle-btn::before {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 20px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        #animation-toggle-btn.sparkle::before {
+            animation: sparkle 0.6s ease-in-out;
         }
     `;
     document.head.appendChild(style);
@@ -33,8 +60,19 @@
         }
     }
 
-    // Check if animations should be enabled (default: true, unless user has disabled them)
-    var animationsEnabled = localStorage.getItem('halloween-animations-enabled') !== 'false';
+    // Function to trigger sparkle effect
+    function triggerSparkle() {
+        var btn = document.getElementById('animation-toggle-btn');
+        if (btn) {
+            btn.classList.add('sparkle');
+            setTimeout(function() {
+                btn.classList.remove('sparkle');
+            }, 600);
+        }
+    }
+
+    // Check if animations should be enabled (default: false, unless user has enabled them)
+    var animationsEnabled = localStorage.getItem('halloween-animations-enabled') === 'true';
 
     // Function to toggle animations
     function toggleAnimations() {
@@ -69,7 +107,7 @@
         var button = document.createElement('button');
         button.id = 'animation-toggle-btn';
         button.style.position = 'fixed';
-        button.style.top = '20px';
+        button.style.bottom = '20px';
         button.style.right = '20px';
         button.style.zIndex = '10000';
         button.style.padding = '10px 15px';
@@ -107,12 +145,16 @@
             applyAnimationState();
             // Start occasional pulsing after button is created
             setInterval(triggerPulse, 8000); // Pulse every 8 seconds
+            // Start sparkle effect every 3 seconds
+            setInterval(triggerSparkle, 3000);
         });
     } else {
         createToggleButton();
         applyAnimationState();
         // Start occasional pulsing after button is created
         setInterval(triggerPulse, 8000); // Pulse every 8 seconds
+        // Start sparkle effect every 3 seconds
+        setInterval(triggerSparkle, 3000);
     }
 
     // Also check periodically for new animations added to the page
