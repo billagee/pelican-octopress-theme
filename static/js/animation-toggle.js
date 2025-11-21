@@ -121,6 +121,7 @@
         button.style.fontWeight = 'bold';
         button.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';
         button.style.transition = 'all 0.3s ease';
+        button.style.display = 'none'; // Hide the Halloween animations button
 
         // Hover effects
         button.onmouseover = function() {
